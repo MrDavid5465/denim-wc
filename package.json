@@ -1,0 +1,23 @@
+{
+  "name": "denim-wc",
+  "version": "0.1.0",
+  "description": "The Denim app shell (header, nav, app switcher, settings, themes, splash) as web components for typiql apps. Lit 3 + Web Awesome 3.",
+  "license": "MIT",
+  "author": "MrDavid5465",
+  "repository": { "type": "git", "url": "https://github.com/MrDavid5465/denim-wc" },
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": { "types": "./index.d.ts", "default": "./index.js" },
+    "./src/*": "./src/*"
+  },
+  "sideEffects": ["./index.js", "./src/denim-*.js"],
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "peerDependencies": {
+    "lit": "^3.3.0",
+    "@awesome.me/webawesome": "^3.14.0"
+  }
+}
