@@ -1,7 +1,7 @@
 # denim-wc
 
 The Denim app shell as **web components** (Lit 3 + Web Awesome 3), for apps
-on a [typiql](https://github.com/MrDavid5465/typiql-rs) backend. It renders
+on a [typiql](file:///var/mnt/Media/david-source/repos/typiql-standins/typiql-rs) backend. It renders
 the frame of an app so the app only writes its pages:
 
 - a **header** with the current application's name and its page links (a
@@ -22,7 +22,7 @@ the frame of an app so the app only writes its pages:
 - `<denim-photo>` (image picker + cropper) and the shared `confirmAsync()`.
 
 It is the non-React counterpart of denim, built on
-[typical-admin-wc](https://github.com/MrDavid5465/typical-admin-wc), whose
+[typical-admin-wc](file:///var/mnt/Media/david-source/repos/typiql-standins/typical-admin-wc), whose
 CRUD screens (`createAdmin`) are what normally goes inside an application.
 
 ## Using with an AI coding agent
@@ -46,8 +46,8 @@ denim-wc imports typical-admin-wc as `../typical-admin-wc`:
 
 ```sh
 cd your-app/src/lib
-git clone https://github.com/MrDavid5465/typical-admin-wc
-git clone https://github.com/MrDavid5465/denim-wc
+git clone file:///var/mnt/Media/david-source/repos/typiql-standins/typical-admin-wc
+git clone file:///var/mnt/Media/david-source/repos/typiql-standins/denim-wc
 ```
 
 ```
@@ -71,7 +71,7 @@ needed).
 A typiql backend, this shell, one CRUD screen and live updates over one
 merged subscription connection. The backend (`Cargo.toml`, `src/main.rs`),
 `vite.config.js` and `index.html` are exactly those in
-[typical-admin-wc's README](https://github.com/MrDavid5465/typical-admin-wc#minimal-app);
+[typical-admin-wc's README](file:///var/mnt/Media/david-source/repos/typiql-standins/typical-admin-wc#minimal-app);
 the two app files:
 
 **`src/main.js`**
