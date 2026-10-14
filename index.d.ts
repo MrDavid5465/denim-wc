@@ -1,5 +1,6 @@
 // Type declarations for denim-wc.
-import type { TaElement, FormSchema, Client, SlotComponent } from '../typical-admin-wc/index.js';
+import type { TaElement, FormSchema, SlotComponent } from '../typical-admin-wc/index.js';
+import type { ApolloClient } from '@apollo/client';
 
 export { confirmAsync, setConfirmHandler, toast } from '../typical-admin-wc/index.js';
 
@@ -87,7 +88,7 @@ export class DenimShell extends TaElement {
   /** Show the splash until the backend answers even without a server contract. */
   requireBackend: boolean;
   healthInterval: number;
-  client?: Client;
+  client?: ApolloClient;
   readonly settings: ShellSettings;
   readonly apps: Application[];
   saveSettings(values: Record<string, any>): Promise<void>;

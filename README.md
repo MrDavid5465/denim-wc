@@ -58,18 +58,20 @@ your-app/src/lib/denim-wc/
 ## npm packages
 
 ```sh
-npm i lit@^3.3.3 @awesome.me/webawesome@^3.14.0
+npm i lit@^3.3.3 @awesome.me/webawesome@^3.14.0 @apollo/client@^4.3.3 graphql@^17.0.2 graphql-ws@^6.4.0 rxjs@^7.8.2
 npm i -D vite@^8           # only for the Vite setup
 ```
 
-Nothing else (no router, no GraphQL client: typical-admin-wc has both).
-`index.d.ts` types the public API. Tests: `node --test test/` (no install
-needed).
+The same packages as typical-admin-wc (its README says what each is for):
+the shell uses its Apollo client and its router (the browser's Navigation
+API). `index.d.ts` types the public API. Tests: `node --test test/` (they
+load typical-admin-wc's modules, so run `npm install` in
+`../typical-admin-wc` first).
 
 ## Minimal app
 
 A typiql backend, this shell, one CRUD screen and live updates over one
-merged subscription connection. The backend (`Cargo.toml`, `src/main.rs`),
+WebSocket. The backend (`Cargo.toml`, `src/main.rs`),
 `vite.config.js` and `index.html` are exactly those in
 [typical-admin-wc's README](file:///var/mnt/Media/david-source/repos/typiql-standins/typical-admin-wc#minimal-app);
 the two app files:
@@ -83,8 +85,8 @@ import { setup } from './lib/typical-admin-wc/index.js';
 import './lib/denim-wc/index.js';
 import { projects } from './projects.js';
 
-// One GraphQL client, ONE merged subscription connection for every live
-// screen, and the router. Call it before the shell renders.
+// The Apollo client (live updates over one WebSocket on the same path), the
+// subscription service and the router. Call it before the shell renders.
 setup({ url: '/typiql/graphql' });
 
 const shell = document.createElement('denim-shell');
@@ -171,7 +173,7 @@ code is the same.
 | `favicon` | `true` | favicon follows the brand colour |
 | `requireBackend` (`require-backend`) | `false` | splash until the backend answers even with nothing to query |
 | `healthInterval` | `1500` | ms between health checks while waiting |
-| `client` | `setup()`'s | a different GraphQL client |
+| `client` | `setup()`'s | a different Apollo client |
 
 Methods: `openSettings()`, `saveSettings(values)`; property `settings`
 (effective values); event `denim-settings-change`.

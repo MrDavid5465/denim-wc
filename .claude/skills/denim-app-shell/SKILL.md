@@ -26,7 +26,8 @@ import './lib/denim-wc/index.js';
 import { projects } from './projects.js';
 import { tasks } from './tasks.js';
 
-setup({ url: '/typiql/graphql' });     // client, ONE subscription connection, router
+setup({ url: '/typiql/graphql' });     // Apollo client, ONE WebSocket for live updates, router
+// No WebSockets on the server or proxy? setup({ url, transport: 'multipart' })
 
 const shell = document.createElement('denim-shell');
 shell.appTitle = 'Acme';
@@ -42,8 +43,12 @@ document.body.append(shell);
 - No confirm host to mount: `confirmAsync()` (from either library, it is the
   same one) creates its dialog on first use.
 - Links are plain `<a href="/tasks/new">`: the router (started by `setup()`)
-  turns internal clicks into navigation. To navigate in code:
-  `router.navigate('/tasks/new')` (typical-admin-wc).
+  intercepts same-origin navigations with the browser's Navigation API, so
+  clicks, Back and Forward stay in the app (`data-native` on a link opts
+  out). To navigate in code: `router.navigate('/tasks/new')`
+  (typical-admin-wc). An element of yours that reads `router.path` needs
+  `new RouteController(this)`, which also re-renders it when the shell
+  re-attaches it (the shell reuses each app's element).
 
 ## 2. Register applications (nav + routes)
 

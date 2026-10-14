@@ -21,6 +21,8 @@ import {
   router,
   icon,
   getClient,
+  request,
+  ping,
 } from '../../typical-admin-wc/index.js';
 import { isLinkActive, linkHref, resolveShellRoute } from './nav.js';
 import { effectiveSettings, writeLocalSettings, readLocalSettings, withoutNulls } from './settings.js';
@@ -148,14 +150,14 @@ export class DenimShell extends TaElement {
           settings: this.settingsSource === 'server',
           settingsFields: this.settingsFields,
         });
-        const data = await this.gqlClient.request(query, {});
+        const data = await request(this.gqlClient, query, {});
         this.my = data.my ?? {};
         if (this.settingsSource === 'server' && this.my.settings) {
           // Cache the theme so the next first paint is already themed.
           const { launchPage, theme, fontSize } = this.settings;
           writeLocalSettings({ ...readLocalSettings(), launchPage, theme, fontSize });
         }
-      } else if (!(await this.gqlClient.ping())) {
+      } else if (!(await ping(this.gqlClient))) {
         throw new Error('backend not answering');
       }
       this.status = 'ready';
@@ -169,14 +171,14 @@ export class DenimShell extends TaElement {
 
   async poll() {
     if (!this.isConnected) return;
-    if (await this.gqlClient.ping()) this.load();
+    if (await ping(this.gqlClient)) this.load();
     else this.pollTimer = setTimeout(() => this.poll(), this.healthInterval);
   }
 
   /** Saves settings (local: localStorage, server: updateSettings + refetch). */
   async saveSettings(values) {
     if (this.settingsSource === 'server') {
-      await this.gqlClient.request(UPDATE_SETTINGS, { settings: values });
+      await request(this.gqlClient, UPDATE_SETTINGS, { settings: values });
       await this.load();
     } else {
       const next = { ...this.settings, ...values };

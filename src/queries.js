@@ -1,7 +1,7 @@
 // The optional server contract (README, "Server contract"). Every part is
 // optional: with a static `applications` prop and settingsSource="local" the
 // shell sends no request of its own.
-import { gql } from '../../typical-admin-wc/src/graphql/language.js';
+import { gql } from '../../typical-admin-wc/src/graphql/documents.js';
 
 export const APPLICATION_FIELDS = 'name path defaultRoute frontEnd links { path text }';
 export const DENIM_SETTINGS_FIELDS = 'launchPage theme fontSize';

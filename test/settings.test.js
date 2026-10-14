@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readLocalSettings, writeLocalSettings, effectiveSettings, DEFAULT_SETTINGS, withoutNulls } from '../src/settings.js';
 import { parseThemeKey, themeKey, themeClasses } from '../src/themes.js';
 import { buildMyQuery, UPDATE_SETTINGS } from '../src/queries.js';
-import { print, variableNames } from '../../typical-admin-wc/src/graphql/language.js';
+import { print, variableNames } from '../../typical-admin-wc/src/graphql/documents.js';
 
 function fakeStorage() {
   const m = new Map();
